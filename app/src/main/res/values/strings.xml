@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JetPack学习Demo</string>
+    <string name="data_loading">加载中...</string>
+</resources>
