@@ -1,17 +1,26 @@
-package com.swx.jetpackxbasic.data;
+package com.swx.jetpackxbasic.db.entity;
 
 import com.swx.jetpackxbasic.model.NewsDetail;
 
 import java.util.List;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
 
 /**
  * Created by swx on 2019/1/29.
  * Mail: bjshenwenxing@netease.corp.com
  * Copyright (c) 2019 NetEase Spot Investment Platform.
  */
+
+@Entity(tableName = "news_detail", primaryKeys = {"id"})
 public class NewsDetailEntity extends NewsEntity implements NewsDetail {
+    @Ignore
     private String body;
+    @Ignore
     private String css;
+    @ColumnInfo(name = "share_url")
     private String shareUrl;
     private String image;
 

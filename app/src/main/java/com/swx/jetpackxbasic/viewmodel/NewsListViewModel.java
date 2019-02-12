@@ -5,8 +5,6 @@ import com.swx.jetpackxbasic.model.News;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -14,7 +12,6 @@ public class NewsListViewModel extends ViewModel {
     private LiveData<List<News>> news;
     private DataRepository dataRepo;
 
-    @Inject
     public  NewsListViewModel(DataRepository dataRepo){
         super();
         this.dataRepo = dataRepo;

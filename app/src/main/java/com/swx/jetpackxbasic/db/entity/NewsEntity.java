@@ -1,4 +1,4 @@
-package com.swx.jetpackxbasic.data;
+package com.swx.jetpackxbasic.db.entity;
 
 import com.swx.jetpackxbasic.model.News;
 
@@ -9,6 +9,7 @@ import java.util.List;
  * Mail: bjshenwenxing@netease.corp.com
  * Copyright (c) 2019 NetEase Spot Investment Platform.
  */
+
 public class NewsEntity implements News {
     private String id;
     private String title;
