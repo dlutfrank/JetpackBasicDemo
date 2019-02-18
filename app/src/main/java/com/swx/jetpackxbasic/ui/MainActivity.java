@@ -1,10 +1,12 @@
 package com.swx.jetpackxbasic.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import timber.log.Timber;
 
 import android.os.Bundle;
 
 import com.swx.jetpackxbasic.R;
+import com.swx.jetpackxbasic.model.News;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,5 +22,9 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
+    }
+
+    public void show(News news) {
+        Timber.d("news show %s", news.toString());
     }
 }

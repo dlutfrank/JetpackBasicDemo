@@ -12,6 +12,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath = true
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
     }
@@ -38,6 +39,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
     implementation "androidx.legacy:legacy-support-v4:$versions.support"
     implementation "androidx.recyclerview:recyclerview:$versions.support"
+    implementation "androidx.cardview:cardview:$versions.support"
     implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
     implementation "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
 

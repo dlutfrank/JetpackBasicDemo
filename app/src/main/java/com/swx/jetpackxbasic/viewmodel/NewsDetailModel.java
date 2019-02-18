@@ -3,8 +3,6 @@ package com.swx.jetpackxbasic.viewmodel;
 import com.swx.jetpackxbasic.DataRepository;
 import com.swx.jetpackxbasic.model.NewsDetail;
 
-import javax.inject.Inject;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 

@@ -4,6 +4,8 @@ import com.swx.jetpackxbasic.model.News;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 /**
  * Created by swx on 2019/1/29.
  * Mail: bjshenwenxing@netease.corp.com
@@ -11,17 +13,19 @@ import java.util.List;
  */
 
 public class NewsEntity implements News {
+    @NonNull
     private String id;
     private String title;
     private List<String> images;
 
-    public NewsEntity(String id, String title, List<String>images) {
+    public NewsEntity(@NonNull String id, String title, List<String>images) {
         this.id = id;
         this.title = title;
         this.images = images;
     }
 
-    public void setId(String id) {
+
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -34,6 +38,7 @@ public class NewsEntity implements News {
     }
 
     @Override
+    @NonNull
     public String getId() {
         return this.id;
     }
