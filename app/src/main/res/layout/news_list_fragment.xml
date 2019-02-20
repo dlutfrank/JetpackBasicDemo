@@ -22,13 +22,13 @@
             android:gravity="center"
             android:textAlignment="center"
             android:text="@string/data_loading"
-            android:visibility="@{isLoading?View.VISIBLE:View.GONE}"/>
+            app:visibleGone="@{isLoading}"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_news"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:visibility="@{isLoading ? View.GONE : View.VISIBLE}"
+            app:visibleGone="@{!isLoading}"
             app:layoutManager="LinearLayoutManager"/>
-
     </LinearLayout>
 </layout>

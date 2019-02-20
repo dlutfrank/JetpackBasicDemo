@@ -6,6 +6,7 @@ android {
         applicationId "com.swx.jetpackxbasic"
         minSdkVersion 19
         targetSdkVersion 28
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -35,6 +36,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation "com.android.support:multidex:1.0.3"
+
     implementation "androidx.appcompat:appcompat:$versions.support"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
     implementation "androidx.legacy:legacy-support-v4:$versions.support"
@@ -49,7 +52,12 @@ dependencies {
 //    implementation "com.google.dagger:dagger:$versions.dagger"
 //    annotationProcessor "com.google.dagger:dagger-compiler:$versions.dagger"
 
+    implementation "com.github.bumptech.glide:glide:$versions.glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$versions.glide"
+
     implementation "com.jakewharton.timber:timber:$versions.timber"
+
+//    implementation 'org.sufficientlysecure:html-textview:3.6'
 
     implementation "androidx.room:room-compiler:$versions.room"
     implementation "androidx.room:room-runtime:$versions.room"

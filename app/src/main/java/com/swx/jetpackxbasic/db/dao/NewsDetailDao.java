@@ -16,14 +16,14 @@ import static androidx.room.OnConflictStrategy.*;
  * Mail: dlut_frank@163.com
  * Copyright (c) 2019 .
  */
-@Dao
+//@Dao
 public interface NewsDetailDao {
     @Insert(onConflict = REPLACE)
     void saveNews(NewsDetailEntity newsDetail);
 
-    @Query("select * from news_detail where id = :id")
-    LiveData<NewsDetailEntity> loadNewsDetail(String id);
-
-    @Query("select * from news_detail where id in (:ids)")
-    LiveData<List<NewsDetailEntity>> loadNewsByIds(String[] ids);
+//    @Query("select * from news_detail where id = :id")
+//    LiveData<NewsDetailEntity> loadNewsDetail(String id);
+//
+//    @Query("select * from news_detail where id in (:ids)")
+//    LiveData<List<NewsDetailEntity>> loadNewsByIds(String[] ids);
 }

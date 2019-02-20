@@ -2,8 +2,11 @@ package com.swx.jetpackxbasic;
 
 import com.swx.jetpackxbasic.model.News;
 import com.swx.jetpackxbasic.model.NewsDetail;
+import com.swx.jetpackxbasic.service.LatestNews;
 import com.swx.jetpackxbasic.service.ZhiHuService;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
@@ -12,6 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
 /**
@@ -29,11 +33,12 @@ public class DataRepository {
 
     private static DataRepository sInstance;
 
-    private LiveData<List<News>> newsData = new MutableLiveData<>();
+    private MutableLiveData<List<News>> newsData = new MutableLiveData<>();
 
     private DataRepository(AppDataBase dataBase) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://news-at.zhihu.com")
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         zhiHuService = retrofit.create(ZhiHuService.class);
         this.dataBase = dataBase;
@@ -63,16 +68,23 @@ public class DataRepository {
 //        if(cachedNewsList == null){
 //            dataCache.setNewsList(newsData);
 //        }
-        zhiHuService.newsList().enqueue(new Callback<List<News>>() {
+        zhiHuService.newsList().enqueue(new Callback<LatestNews>() {
             @Override
-            public void onResponse(Call<List<News>> call, Response<List<News>> response) {
-                ((MutableLiveData<List<News>>)newsData).setValue(response.body());
-                Timber.d("onResponse: ");
+            public void onResponse(Call<LatestNews> call, Response<LatestNews> response) {
+                LatestNews latestNews = response.body();
+                if(latestNews != null){
+                    List<News> list = new ArrayList<>(latestNews.getTopStories());
+                    list.removeAll(latestNews.getStories());
+                    list.addAll(latestNews.getStories());
+                    newsData.setValue(list);
+                    Timber.d("data: %s", list.toString());
+                }
+                Timber.d("onResponse: %s", response.message());
             }
 
             @Override
-            public void onFailure(Call<List<News>> call, Throwable t) {
-                Timber.d("onFailure: ");
+            public void onFailure(Call<LatestNews> call, Throwable t) {
+                Timber.d("onFailure: %s", t.getMessage());
             }
         });
         return newsData;

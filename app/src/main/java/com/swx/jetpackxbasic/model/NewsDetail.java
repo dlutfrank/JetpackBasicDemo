@@ -9,5 +9,4 @@ public interface NewsDetail extends News{
     String getBody();
     String getCss();
     String getShareUrl();
-    String getImage();
 }

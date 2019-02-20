@@ -17,7 +17,7 @@ import retrofit2.http.Path;
 public interface ZhiHuService {
 
     @GET("api/4/news/latest")
-    Call<List<News>> newsList();
+    Call<LatestNews> newsList();
 
     @GET("api/4/news/{id}")
     Call<NewsDetail> news(@Path("id") String newsId);

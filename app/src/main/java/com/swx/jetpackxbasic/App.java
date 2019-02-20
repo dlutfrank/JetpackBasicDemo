@@ -1,7 +1,7 @@
 package com.swx.jetpackxbasic;
 
-import android.app.Application;
 
+import androidx.multidex.MultiDexApplication;
 import timber.log.Timber;
 
 /**
@@ -9,7 +9,7 @@ import timber.log.Timber;
  * Mail: dlut_frank@163.com
  * Copyright (c) 2019 .
  */
-public class App extends Application {
+public class App extends MultiDexApplication {
 
     private static App _instance = null;
 

@@ -5,6 +5,7 @@ import com.swx.jetpackxbasic.model.News;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Created by swx on 2019/1/29.
@@ -17,6 +18,7 @@ public class NewsEntity implements News {
     private String id;
     private String title;
     private List<String> images;
+    private String image;
 
     public NewsEntity(@NonNull String id, String title, List<String>images) {
         this.id = id;
@@ -37,6 +39,33 @@ public class NewsEntity implements News {
         this.title = title;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if(obj == null ) {
+            return  false;
+        }
+        if(obj instanceof News) {
+            return id.equals(((News) obj).getId());
+        }
+        return  false;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return String.format("\n{ id: %s,\ntitle: %s,\nimage: %s,\nimage[0]: %s}\n",
+                id, title, image != null? image : "", images != null ? images.get(0): "");
+    }
+
     @Override
     @NonNull
     public String getId() {
@@ -51,5 +80,10 @@ public class NewsEntity implements News {
     @Override
     public List<String> getImages() {
         return this.images;
+    }
+
+    @Override
+    public String getImage() {
+        return this.image;
     }
 }

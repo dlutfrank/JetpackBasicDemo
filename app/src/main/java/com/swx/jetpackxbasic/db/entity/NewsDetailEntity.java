@@ -4,6 +4,7 @@ import com.swx.jetpackxbasic.model.NewsDetail;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -14,15 +15,13 @@ import androidx.room.Ignore;
  * Copyright (c) 2019 NetEase Spot Investment Platform.
  */
 
-@Entity(tableName = "news_detail", primaryKeys = {"id"})
+//@Entity(tableName = "news_detail", primaryKeys = {"id"})
 public class NewsDetailEntity extends NewsEntity implements NewsDetail {
-    @Ignore
     private String body;
     @Ignore
     private String css;
-    @ColumnInfo(name = "share_url")
+//    @ColumnInfo(name = "share_url")
     private String shareUrl;
-    private String image;
 
     public NewsDetailEntity(String id, String title, List<String> images) {
         super(id, title, images);
@@ -40,9 +39,7 @@ public class NewsDetailEntity extends NewsEntity implements NewsDetail {
         this.shareUrl = shareUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+
 
     @Override
     public String getBody() {
@@ -57,10 +54,5 @@ public class NewsDetailEntity extends NewsEntity implements NewsDetail {
     @Override
     public String getShareUrl() {
         return this.shareUrl;
-    }
-
-    @Override
-    public String getImage() {
-        return this.image;
     }
 }
