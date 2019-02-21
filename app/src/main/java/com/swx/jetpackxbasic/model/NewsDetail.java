@@ -10,5 +10,6 @@ import java.util.List;
 public interface NewsDetail extends News{
     String getBody();
     List<String> getCss();
+    List<String> getJs();
     String getShareUrl();
 }

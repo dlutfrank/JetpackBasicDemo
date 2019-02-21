@@ -4,10 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.swx.jetpackxbasic.R;
 import com.swx.jetpackxbasic.databinding.NewsDetailFragmentBinding;
+import com.swx.jetpackxbasic.databinding.NewsWebviewFragmentBinding;
 import com.swx.jetpackxbasic.model.NewsDetail;
+import com.swx.jetpackxbasic.utils.HtmlUtil;
 import com.swx.jetpackxbasic.viewmodel.NewsDetailModel;
 
 import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
@@ -29,16 +38,19 @@ public class NewsDetailFragment extends Fragment {
     public static final String NEWS_ID_KEY = "_news_id_key_";
 
     private NewsDetailModel mModel;
-    private NewsDetailFragmentBinding mBinding;
-    private HtmlTextView mHtmlTextView;
+//    private NewsDetailFragmentBinding mBinding;
+    private NewsWebviewFragmentBinding mBinding;
+    private WebView mHtmlTextView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.news_detail_fragment, container, false);
-        mHtmlTextView= mBinding.htmlContent;
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.news_webview_fragment, container, false);
+        mHtmlTextView = mBinding.htmlContent;
+        initWebView(mHtmlTextView);
         return mBinding.getRoot();
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -50,10 +62,30 @@ public class NewsDetailFragment extends Fragment {
         subscribeData(mModel.getNewsDetail());
     }
 
+    private void initWebView(WebView webView) {
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setSupportZoom(true);
+    }
+
     private void subscribeData(LiveData<NewsDetail> liveData) {
         liveData.observe(this, newsDetail -> {
             mBinding.setNewsDetail(newsDetail);
-            mHtmlTextView.setHtml(newsDetail.getBody(),new HtmlHttpImageGetter(mHtmlTextView));
+            String htmlData = HtmlUtil.createHtmlData(newsDetail.getBody(),newsDetail.getCss(),newsDetail.getJs());
+//            mHtmlTextView.setHtml(htmlData,new HtmlHttpImageGetter(mHtmlTextView));
+            mHtmlTextView.loadData(htmlData, HtmlUtil.MIME_TYPE,HtmlUtil.ENCODING);
+//            mHtmlTextView.setWebViewClient(new WebViewClient(){
+//                @Override
+//                public void onPageFinished(WebView view, String url) {
+//                    super.onPageFinished(view, url);
+//                    int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+//                    int h = View.MeasureSpec.makeMeasureSpec(0,
+//                            View.MeasureSpec.UNSPECIFIED);
+//                    mHtmlTextView.measure(w, h);
+//                }
+//            });
         });
     }
 

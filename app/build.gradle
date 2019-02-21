@@ -17,6 +17,9 @@ android {
             }
         }
     }
+    configurations {
+        all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -33,6 +36,7 @@ android {
     }
 }
 
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -43,6 +47,9 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$versions.support"
     implementation "androidx.recyclerview:recyclerview:$versions.support"
     implementation "androidx.cardview:cardview:$versions.support"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$versions.support"
+    implementation "com.google.android.material:material:1.1.0-alpha03"
+
     implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
     implementation "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
 
@@ -63,6 +70,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$versions.room"
     implementation "androidx.room:room-rxjava2:$versions.room"
     implementation "androidx.room:room-common:$versions.room"
+
 
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation "androidx.test:runner:$versions.atsl_runner"

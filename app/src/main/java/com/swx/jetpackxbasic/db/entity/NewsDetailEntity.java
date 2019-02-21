@@ -18,10 +18,10 @@ import androidx.room.Ignore;
 //@Entity(tableName = "news_detail", primaryKeys = {"id"})
 public class NewsDetailEntity extends NewsEntity implements NewsDetail {
     private String body;
-    @Ignore
     private List<String> css;
 //    @ColumnInfo(name = "share_url")
     private String shareUrl;
+    private List<String> js;
 
     public NewsDetailEntity(String id, String title, List<String> images) {
         super(id, title, images);
@@ -39,7 +39,9 @@ public class NewsDetailEntity extends NewsEntity implements NewsDetail {
         this.shareUrl = shareUrl;
     }
 
-
+    public void setJs(List<String> js) {
+        this.js = js;
+    }
 
     @Override
     public String getBody() {
@@ -49,6 +51,11 @@ public class NewsDetailEntity extends NewsEntity implements NewsDetail {
     @Override
     public List<String> getCss() {
         return this.css;
+    }
+
+    @Override
+    public List<String> getJs() {
+        return null;
     }
 
     @Override
