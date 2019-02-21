@@ -8,6 +8,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -63,11 +64,28 @@ public class NewsDetailFragment extends Fragment {
     }
 
     private void initWebView(WebView webView) {
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        webSettings.setSupportZoom(true);
+//        webView.getSettings().setJavaScriptEnabled(true);
+//        webView.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//                Toast.makeText(getContext(),"load finished",Toast.LENGTH_LONG).show();
+//                webView.loadUrl("javascript:App.resize(document.body.getBoundingClientRect().height)");
+//                super.onPageFinished(view, url);
+//            }
+//        });
+//        webView.addJavascriptInterface(this, "App");
+    }
+
+    @JavascriptInterface
+    public void resize(final float height) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getActivity(), height + "", Toast.LENGTH_LONG).show();
+                //此处的 layoutParmas 需要根据父控件类型进行区分，这里为了简单就不这么做了
+                mHtmlTextView.setLayoutParams(new FrameLayout.LayoutParams(getResources().getDisplayMetrics().widthPixels, (int) (height * getResources().getDisplayMetrics().density)));
+            }
+        });
     }
 
     private void subscribeData(LiveData<NewsDetail> liveData) {
