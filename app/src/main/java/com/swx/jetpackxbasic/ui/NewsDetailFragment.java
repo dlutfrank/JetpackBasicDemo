@@ -10,6 +10,9 @@ import com.swx.jetpackxbasic.databinding.NewsDetailFragmentBinding;
 import com.swx.jetpackxbasic.model.NewsDetail;
 import com.swx.jetpackxbasic.viewmodel.NewsDetailModel;
 
+import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
+import org.sufficientlysecure.htmltextview.HtmlTextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -27,11 +30,13 @@ public class NewsDetailFragment extends Fragment {
 
     private NewsDetailModel mModel;
     private NewsDetailFragmentBinding mBinding;
+    private HtmlTextView mHtmlTextView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.news_detail_fragment, container, false);
+        mHtmlTextView= mBinding.htmlContent;
         return mBinding.getRoot();
     }
 
@@ -48,6 +53,7 @@ public class NewsDetailFragment extends Fragment {
     private void subscribeData(LiveData<NewsDetail> liveData) {
         liveData.observe(this, newsDetail -> {
             mBinding.setNewsDetail(newsDetail);
+            mHtmlTextView.setHtml(newsDetail.getBody(),new HtmlHttpImageGetter(mHtmlTextView));
         });
     }
 

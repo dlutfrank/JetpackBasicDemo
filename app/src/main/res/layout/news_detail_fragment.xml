@@ -21,9 +21,9 @@
                 android:layout_height="360dp">
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     app:fromUrl="@{newsDetail.image}"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="360dp" />
 
                 <TextView
                     android:layout_gravity="bottom"
@@ -36,14 +36,15 @@
                     android:layout_height="wrap_content" />
 
             </FrameLayout>
-            <TextView
-                app:htmText="@{newsDetail.body}"
+            <org.sufficientlysecure.htmltextview.HtmlTextView
+                android:id="@+id/html_content"
                 android:textSize="16sp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
         </LinearLayout>
 
     </ScrollView>
