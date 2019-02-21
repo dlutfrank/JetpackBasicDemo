@@ -2,12 +2,10 @@ package com.swx.jetpackxbasic.ui;
 
 import android.text.Html;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import androidx.databinding.BindingAdapter;
 
@@ -26,7 +24,7 @@ public class BindingAdapters {
         if (imageUrl != null && !imageUrl.isEmpty()) {
             Glide.with(imageView.getContext())
                     .load(imageUrl)
-                    .apply(RequestOptions.circleCropTransform())
+//                    .apply(RequestOptions.circleCropTransform())
                     .into(imageView);
         }
     }

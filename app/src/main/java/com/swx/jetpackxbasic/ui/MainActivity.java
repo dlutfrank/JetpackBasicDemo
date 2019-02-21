@@ -1,6 +1,7 @@
 package com.swx.jetpackxbasic.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import timber.log.Timber;
 
 import android.os.Bundle;
@@ -26,5 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void show(News news) {
         Timber.d("news show %s", news.toString());
+        Fragment fragment = NewsDetailFragment.newsFragment(news.getId());
+        getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack("news")
+                .replace(R.id.fragment_container, fragment, null)
+                .commit();
     }
 }

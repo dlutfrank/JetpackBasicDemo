@@ -19,7 +19,7 @@ import androidx.room.Ignore;
 public class NewsDetailEntity extends NewsEntity implements NewsDetail {
     private String body;
     @Ignore
-    private String css;
+    private List<String> css;
 //    @ColumnInfo(name = "share_url")
     private String shareUrl;
 
@@ -31,7 +31,7 @@ public class NewsDetailEntity extends NewsEntity implements NewsDetail {
         this.body = body;
     }
 
-    public void setCss(String css) {
+    public void setCss(List<String> css) {
         this.css = css;
     }
 
@@ -47,7 +47,7 @@ public class NewsDetailEntity extends NewsEntity implements NewsDetail {
     }
 
     @Override
-    public String getCss() {
+    public List<String> getCss() {
         return this.css;
     }
 

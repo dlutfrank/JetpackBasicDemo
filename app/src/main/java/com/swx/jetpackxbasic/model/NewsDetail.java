@@ -1,5 +1,7 @@
 package com.swx.jetpackxbasic.model;
 
+import java.util.List;
+
 /**
  * Created by swx on 2019/1/29.
  * Mail: bjshenwenxing@netease.corp.com
@@ -7,6 +9,6 @@ package com.swx.jetpackxbasic.model;
  */
 public interface NewsDetail extends News{
     String getBody();
-    String getCss();
+    List<String> getCss();
     String getShareUrl();
 }

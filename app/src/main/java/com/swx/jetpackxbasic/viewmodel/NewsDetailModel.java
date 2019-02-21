@@ -9,6 +9,7 @@ import com.swx.jetpackxbasic.model.NewsDetail;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -23,6 +24,7 @@ public class NewsDetailModel extends AndroidViewModel {
     private LiveData<NewsDetail> newsDetail;
     private final DataRepository dataRepo;
     private final String newsId;
+//    private final MutableLiveData<String> idInput = new MutableLiveData<>();
 
     public NewsDetailModel(Application application, String newsId) {
         super(application);
@@ -32,7 +34,7 @@ public class NewsDetailModel extends AndroidViewModel {
         newsDetail = dataRepo.getNewsDetail(newsId);
     }
 
-    LiveData<NewsDetail> getNewsDetail() {
+    public LiveData<NewsDetail> getNewsDetail() {
         return newsDetail;
     }
 

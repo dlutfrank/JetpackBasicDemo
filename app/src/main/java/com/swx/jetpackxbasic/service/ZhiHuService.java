@@ -1,9 +1,6 @@
 package com.swx.jetpackxbasic.service;
 
-import com.swx.jetpackxbasic.model.News;
-import com.swx.jetpackxbasic.model.NewsDetail;
-
-import java.util.List;
+import com.swx.jetpackxbasic.db.entity.NewsDetailEntity;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -20,5 +17,5 @@ public interface ZhiHuService {
     Call<LatestNews> newsList();
 
     @GET("api/4/news/{id}")
-    Call<NewsDetail> news(@Path("id") String newsId);
+    Call<NewsDetailEntity> news(@Path("id") String newsId);
 }

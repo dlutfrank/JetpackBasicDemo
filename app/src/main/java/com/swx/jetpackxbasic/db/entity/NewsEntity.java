@@ -45,7 +45,7 @@ public class NewsEntity implements News {
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return id.hashCode() & title.hashCode();
     }
 
     @Override
@@ -54,7 +54,8 @@ public class NewsEntity implements News {
             return  false;
         }
         if(obj instanceof News) {
-            return id.equals(((News) obj).getId());
+            News o = (News)obj;
+            return id.equals(o.getId()) && title.equals(o.getTitle());
         }
         return  false;
     }

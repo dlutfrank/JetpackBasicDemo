@@ -1,12 +1,12 @@
 package com.swx.jetpackxbasic;
 
+import com.swx.jetpackxbasic.db.entity.NewsDetailEntity;
 import com.swx.jetpackxbasic.model.News;
 import com.swx.jetpackxbasic.model.NewsDetail;
 import com.swx.jetpackxbasic.service.LatestNews;
 import com.swx.jetpackxbasic.service.ZhiHuService;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
@@ -55,6 +55,7 @@ public class DataRepository {
         return sInstance;
     }
 
+
     private boolean checkNewsList() {
         return  false;
     }
@@ -94,6 +95,7 @@ public class DataRepository {
 
     }
 
+
     public LiveData<NewsDetail> getNewsDetail(String id) {
         refreshDetail(id);
 //        LiveData<NewsDetail> cachedDetail = dataCache.getNewsDetail(id);
@@ -102,16 +104,16 @@ public class DataRepository {
 //        }
         final MutableLiveData<NewsDetail> newsDetail = new MutableLiveData<>();
 //        dataCache.setNewsDetail(id, newsDetail);
-        zhiHuService.news(id).enqueue(new Callback<NewsDetail>() {
+         zhiHuService.news(id).enqueue(new Callback<NewsDetailEntity>() {
             @Override
-            public void onResponse(Call<NewsDetail> call, Response<NewsDetail> response) {
+            public void onResponse(Call<NewsDetailEntity> call, Response<NewsDetailEntity> response) {
                 newsDetail.setValue(response.body());
-                Timber.d("onResponse: ");
+                Timber.d("onResponse: %s", response.body().toString());
             }
 
             @Override
-            public void onFailure(Call<NewsDetail> call, Throwable t) {
-                Timber.d("onFailure: ");
+            public void onFailure(Call<NewsDetailEntity> call, Throwable t) {
+                Timber.d("onFailure: %s", t.getMessage());
             }
         });
         return newsDetail;

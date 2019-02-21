@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import timber.log.Timber;
 
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,10 +45,10 @@ public class NewsListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(NewsListViewModel.class);
-        subcribeData(mViewModel.getNews());
+        subscribeData(mViewModel.getNews());
     }
 
-    private void subcribeData(LiveData<List<News>> liveData) {
+    private void subscribeData(LiveData<List<News>> liveData) {
         mBinding.setIsLoading(true);
         liveData.observe(this, newsEntities -> {
             if(newsEntities != null){
@@ -62,7 +61,7 @@ public class NewsListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        subcribeData(mViewModel.getNews());
+        subscribeData(mViewModel.getNews());
     }
 
     private final NewsItemCallback mItemCallback = newsItem -> {
