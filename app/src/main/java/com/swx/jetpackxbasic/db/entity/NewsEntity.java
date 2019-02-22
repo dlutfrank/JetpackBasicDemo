@@ -15,10 +15,10 @@ import androidx.annotation.Nullable;
 
 public class NewsEntity implements News {
     @NonNull
-    private String id;
-    private String title;
-    private List<String> images;
-    private String image;
+    protected String id;
+    protected String title;
+    protected List<String> images;
+    protected String image;
 
     public NewsEntity(@NonNull String id, String title, List<String>images) {
         this.id = id;

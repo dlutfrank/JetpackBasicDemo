@@ -1,5 +1,6 @@
 package com.swx.jetpackxbasic;
 
+import com.swx.jetpackxbasic.db.AppDataBase;
 import com.swx.jetpackxbasic.db.entity.NewsDetailEntity;
 import com.swx.jetpackxbasic.model.News;
 import com.swx.jetpackxbasic.model.NewsDetail;

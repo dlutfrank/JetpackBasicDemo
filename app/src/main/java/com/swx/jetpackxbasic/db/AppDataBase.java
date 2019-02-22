@@ -1,16 +1,10 @@
-package com.swx.jetpackxbasic;
+package com.swx.jetpackxbasic.db;
 
 import android.content.Context;
 
 import com.swx.jetpackxbasic.db.dao.NewsDetailDao;
-import com.swx.jetpackxbasic.db.entity.NewsDetailEntity;
 
-import androidx.annotation.NonNull;
-import androidx.room.Database;
-import androidx.room.Room;
 import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
-import timber.log.Timber;
 
 /**
  * Created by swx on 2019/1/31.

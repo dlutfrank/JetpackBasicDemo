@@ -1,6 +1,8 @@
 package com.swx.jetpackxbasic;
 
 
+import com.swx.jetpackxbasic.db.AppDataBase;
+
 import androidx.multidex.MultiDexApplication;
 import timber.log.Timber;
 

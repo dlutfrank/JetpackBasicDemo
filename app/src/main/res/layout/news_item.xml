@@ -28,7 +28,7 @@
             <ImageView
                 android:layout_marginStart="5dp"
                 android:layout_gravity="center_vertical"
-                app:fromUrl="@{news.image != null ? news.image: (news.images != null ? news.images.get(0):null)}"
+                app:fromUrl="@{news.image ?? news.images.get(0)}"
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
             <TextView
