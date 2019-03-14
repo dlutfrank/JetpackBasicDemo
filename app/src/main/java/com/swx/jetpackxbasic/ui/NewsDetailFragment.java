@@ -5,23 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.swx.jetpackxbasic.R;
-import com.swx.jetpackxbasic.databinding.NewsDetailFragmentBinding;
 import com.swx.jetpackxbasic.databinding.NewsWebviewFragmentBinding;
 import com.swx.jetpackxbasic.model.NewsDetail;
 import com.swx.jetpackxbasic.utils.HtmlUtil;
 import com.swx.jetpackxbasic.viewmodel.NewsDetailModel;
-
-import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
-import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,7 +31,6 @@ public class NewsDetailFragment extends Fragment {
     public static final String NEWS_ID_KEY = "_news_id_key_";
 
     private NewsDetailModel mModel;
-//    private NewsDetailFragmentBinding mBinding;
     private NewsWebviewFragmentBinding mBinding;
     private WebView mHtmlTextView;
 
