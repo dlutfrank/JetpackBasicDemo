@@ -2,6 +2,7 @@ package com.swx.jetpackxbasic.service;
 
 import com.swx.jetpackxbasic.db.entity.NewsDetailEntity;
 
+import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -15,6 +16,9 @@ public interface ZhiHuService {
 
     @GET("api/4/news/latest")
     Call<LatestNews> newsList();
+
+    @GET("api/4/news/latest")
+    Single<LatestNews> newsListRx();
 
     @GET("api/4/news/{id}")
     Call<NewsDetailEntity> news(@Path("id") String newsId);

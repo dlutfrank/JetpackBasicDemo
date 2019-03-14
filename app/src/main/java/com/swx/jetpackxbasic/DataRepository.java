@@ -12,10 +12,16 @@ import java.util.List;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
@@ -39,6 +45,7 @@ public class DataRepository {
     private DataRepository(AppDataBase dataBase) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://news-at.zhihu.com")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         zhiHuService = retrofit.create(ZhiHuService.class);
@@ -70,25 +77,51 @@ public class DataRepository {
 //        if(cachedNewsList == null){
 //            dataCache.setNewsList(newsData);
 //        }
-        zhiHuService.newsList().enqueue(new Callback<LatestNews>() {
-            @Override
-            public void onResponse(Call<LatestNews> call, Response<LatestNews> response) {
-                LatestNews latestNews = response.body();
-                if(latestNews != null){
-                    List<News> list = new ArrayList<>(latestNews.getTopStories());
-                    list.removeAll(latestNews.getStories());
-                    list.addAll(latestNews.getStories());
-                    newsData.setValue(list);
-                    Timber.d("data: %s", list.toString());
-                }
-                Timber.d("onResponse: %s", response.message());
-            }
+        zhiHuService.newsListRx()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new SingleObserver<LatestNews>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-            @Override
-            public void onFailure(Call<LatestNews> call, Throwable t) {
-                Timber.d("onFailure: %s", t.getMessage());
-            }
-        });
+                    }
+
+                    @Override
+                    public void onSuccess(LatestNews latestNews) {
+                        if(latestNews != null){
+                            List<News> list = new ArrayList<>(latestNews.getTopStories());
+                            list.removeAll(latestNews.getStories());
+                            list.addAll(latestNews.getStories());
+                            newsData.setValue(list);
+                            Timber.d("data: %s", list.toString());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.d("onFailure: %s", e.getMessage());
+                    }
+                });
+
+//        zhiHuService.newsList().enqueue(new Callback<LatestNews>() {
+//            @Override
+//            public void onResponse(Call<LatestNews> call, Response<LatestNews> response) {
+//                LatestNews latestNews = response.body();
+//                if(latestNews != null){
+//                    List<News> list = new ArrayList<>(latestNews.getTopStories());
+//                    list.removeAll(latestNews.getStories());
+//                    list.addAll(latestNews.getStories());
+//                    newsData.setValue(list);
+//                    Timber.d("data: %s", list.toString());
+//                }
+//                Timber.d("onResponse: %s", response.message());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<LatestNews> call, Throwable t) {
+//                Timber.d("onFailure: %s", t.getMessage());
+//            }
+//        });
         return newsData;
     }
 
